@@ -1,4 +1,4 @@
-package shee_rpc
+package sheerpc
 
 import (
 	"encoding/json"
