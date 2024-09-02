@@ -2,6 +2,7 @@ package sheerpc
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/sheep-in-box/sheerpc/codec"
 	"io"
@@ -104,7 +105,7 @@ type request struct {
 func (server *Server) readRequestHeader(cc codec.Codec) (*codec.Header, error) {
 	var h codec.Header
 	if err := cc.ReadHeader(&h); err != nil {
-		if err != io.EOF && err != io.ErrUnexpectedEOF {
+		if !errors.Is(err, io.EOF) && !errors.Is(err, io.ErrUnexpectedEOF) {
 			log.Println("rpc server: read header error:", err)
 		}
 		return nil, err
