@@ -36,7 +36,7 @@ func New(timeout time.Duration) *SheeRegistry {
 	}
 }
 
-var DefaultGeeRegister = New(defaultTimeout)
+var DefaultSheeRegister = New(defaultTimeout)
 
 func (r *SheeRegistry) putServer(addr string) {
 	r.mu.Lock()
@@ -64,7 +64,7 @@ func (r *SheeRegistry) aliveServers() []string {
 	return alive
 }
 
-// Runs at /_geerpc_/registry
+// Runs at /_sheerpc_/registry
 func (r *SheeRegistry) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	switch req.Method {
 	case "GET":
@@ -90,7 +90,7 @@ func (r *SheeRegistry) HandleHTTP(registryPath string) {
 }
 
 func HandleHTTP() {
-	DefaultGeeRegister.HandleHTTP(defaultPath)
+	DefaultSheeRegister.HandleHTTP(defaultPath)
 }
 
 // Heartbeat send a heartbeat message every once in a while

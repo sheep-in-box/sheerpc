@@ -16,7 +16,7 @@ type SheeRegistryDiscovery struct {
 
 const defaultUpdateTimeout = time.Second * 10
 
-func NewGeeRegistryDiscovery(registerAddr string, timeout time.Duration) *SheeRegistryDiscovery {
+func NewSheeRegistryDiscovery(registerAddr string, timeout time.Duration) *SheeRegistryDiscovery {
 	if timeout == 0 {
 		timeout = defaultUpdateTimeout
 	}
@@ -48,7 +48,7 @@ func (d *SheeRegistryDiscovery) Refresh() error {
 		log.Println("rpc registry refresh err:", err)
 		return err
 	}
-	servers := strings.Split(resp.Header.Get("X-Geerpc-Servers"), ",")
+	servers := strings.Split(resp.Header.Get("X-Sheerpc-Servers"), ",")
 	d.servers = make([]string, 0, len(servers))
 	for _, server := range servers {
 		if strings.TrimSpace(server) != "" {
